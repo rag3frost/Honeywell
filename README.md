@@ -73,6 +73,10 @@ the local path above is the tested one.)*
 ## Repository layout
 
 ```
+dashboard/
+  __init__.py      # package marker
+  app.py           # Streamlit dashboard
+  labels.py        # label copy / UI text helpers
 eco_loop/
   config.py         # typed config loaded from config.yaml
   carbon.py         # offline hourly grid-carbon profile
@@ -89,7 +93,6 @@ eco_loop/
     tools.py        # MCP ToolBox + FastMCP server
     prompts.py      # system prompt + tool schema
     orchestrator.py # MCP client + Ollama tool-calling loop
-dashboard/app.py    # Streamlit: kWh headline, comfort proof, decision log
 docs/               # PRD + architecture
 models/             # baseline.idf, run.idf, weather.epw, metadata.json
 data/               # carbon.csv + run outputs
