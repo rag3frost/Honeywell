@@ -5,6 +5,8 @@ sensor data from a running EnergyPlus building simulation, reasons about comfort
 carbon, and injects thermostat set-points back into the simulation — proving quantifiable
 energy savings without sacrificing occupant comfort.**
 
+Live dashboard: https://honeywell-gegblqsajwnzayseqo3h4y.streamlit.app
+
 ```
 EnergyPlus (5-zone office, live co-sim) ──sensor summary──▶ MCP tool server ──▶ Ollama LLM
         ▲                                                                          │
