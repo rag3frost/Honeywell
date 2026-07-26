@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+output_*/
+.pytest_cache/
+.DS_Store
+*.mov
+*.mp4
+.claude/
+skills-lock.json
+.ruff_cache/

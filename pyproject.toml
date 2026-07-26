@@ -1,0 +1,30 @@
+[project]
+name = "eco-loop"
+version = "0.1.0"
+description = "Eco-Loop Building Agents — autonomous closed-loop EnergyPlus + LLM control"
+requires-python = ">=3.12"
+dependencies = [
+    "eppy>=0.5.63",
+    "mcp[cli]>=1.9.0",
+    "ollama>=0.4.0",
+    "streamlit>=1.40.0",
+    "streamlit-autorefresh>=1.0.1",
+    "plotly>=5.24.0",
+    "pandas>=2.2.0",
+    "pyyaml>=6.0",
+    "httpx>=0.27.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0", "ruff>=0.8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
+
+[tool.ruff.lint]
+# BLE001: the orchestrator's catch-all around the LLM call is the robustness contract.
+# SIM117: nested `async with` reads clearer for the MCP client pair.
+ignore = ["BLE001", "SIM117"]

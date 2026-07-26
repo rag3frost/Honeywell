@@ -1,0 +1,42 @@
+# Full stack: ollama (LLM) + sim host (EnergyPlus + MCP server) + orchestrator + dashboard.
+# NOTE: authored on a machine without Docker — validated for structure, not yet run.
+# Local (no Docker) path in README works today: make baseline && make sim && make agent.
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes: [ollama:/root/.ollama]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      retries: 20
+
+  ollama-init:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama: {condition: service_healthy}
+    environment: [OLLAMA_HOST=http://ollama:11434]
+    entrypoint: ["ollama", "pull", "qwen2.5:7b"]
+
+  sim:
+    build: .
+    depends_on:
+      ollama-init: {condition: service_completed_successfully}
+    volumes: [./data:/app/data, ./output_ai:/app/output_ai]
+    ports: ["8765:8765"]
+
+  agent:
+    build: .
+    command: ["uv", "run", "python", "-m", "eco_loop.agent.orchestrator"]
+    environment: [ECO_LOOP_MCP_URL=http://sim:8765/mcp]
+    depends_on: [sim]
+    volumes: [./data:/app/data]
+
+  dashboard:
+    build: .
+    command: ["uv", "run", "streamlit", "run", "dashboard/app.py",
+              "--server.headless", "true", "--server.address", "0.0.0.0"]
+    ports: ["8501:8501"]
+    volumes: [./data:/app/data]
+
+volumes:
+  ollama:

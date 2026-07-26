@@ -1,0 +1,46 @@
+energyplus_dir: ~/energyplus-26.1.0
+idf_example: ExampleFiles/5ZoneAirCooled.idf
+weather_glob: WeatherData/USA_IL_Chicago-OHare*.epw
+
+run_period:            # hottest 7-day window in the Chicago EPW (peaks to 35 C) —
+  begin_month: 7       # a cooling controller must be judged on a cooling-relevant week
+  begin_day: 15
+  end_month: 7
+  end_day: 21
+timesteps_per_hour: 4
+
+comfort:
+  occ_low_c: 21.0
+  occ_high_c: 27.0        # ASHRAE 55 summer w/ 0.137 m/s air movement keeps PMV<=0.7
+  pmv_limit: 0.7          # up to ~27.5 C; 27.0 leaves margin. Warmer setpoints are the
+  occupied_hours: [8, 18] # main cooling lever (cf. Japan "Cool Biz" 28 C offices).
+  occupied_weekdays_only: true
+
+clamps:
+  heat_min: 15.0
+  heat_max: 23.0
+  cool_min: 22.0
+  cool_max: 30.0
+  min_deadband: 2.0
+
+baseline_setpoints:
+  heating_c: 21.0
+  cooling_c: 23.5
+
+agent:
+  model: "qwen2.5:7b"
+  fallback_model: "llama3.2:3b"
+  decision_timeout_s: 25
+  max_tool_rounds: 3
+  ollama_host: "http://localhost:11434"
+  temperature: 0.2
+
+mcp:
+  host: "127.0.0.1"
+  port: 8765
+
+paths:
+  data_dir: data
+  models_dir: models
+
+carbon_csv: data/carbon.csv

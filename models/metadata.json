@@ -1,0 +1,18 @@
+{
+  "zones": [
+    "SPACE1-1",
+    "SPACE2-1",
+    "SPACE3-1",
+    "SPACE4-1",
+    "SPACE5-1"
+  ],
+  "people": [
+    "SPACE1-1 People 1",
+    "SPACE2-1 People 1",
+    "SPACE3-1 People 1",
+    "SPACE4-1 People 1",
+    "SPACE5-1 People 1"
+  ],
+  "heat_sched": "Htg-SetP-Sch",
+  "cool_sched": "Clg-SetP-Sch"
+}

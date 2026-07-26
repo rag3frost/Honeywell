@@ -1,0 +1,13 @@
+name: ci
+on:
+  push: {branches: [main, build]}
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --dev
+      - run: uv run ruff check .
+      - run: uv run pytest -q   # E+-dependent tests skip when EnergyPlus absent
