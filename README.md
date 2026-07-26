@@ -7,6 +7,14 @@ energy savings without sacrificing occupant comfort.**
 
 Live dashboard: https://honeywell-gegblqsajwnzayseqo3h4y.streamlit.app
 
+## Screenshots
+
+<p align="center">
+  <img src="dashboard_images/Screenshot%202026-07-27%20at%201.20.33%E2%80%AFAM.png" width="31%" />
+  <img src="dashboard_images/Screenshot%202026-07-27%20at%201.20.48%E2%80%AFAM.png" width="31%" />
+  <img src="dashboard_images/Screenshot%202026-07-27%20at%201.21.08%E2%80%AFAM.png" width="31%" />
+</p>
+
 ```
 EnergyPlus (5-zone office, live co-sim) ──sensor summary──▶ MCP tool server ──▶ Ollama LLM
         ▲                                                                          │
