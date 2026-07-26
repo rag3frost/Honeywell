@@ -25,9 +25,9 @@ EnergyPlus (5-zone office, live co-sim) ──sensor summary──▶ MCP tool s
 
 | Run | Energy | vs baseline | Comfort violations |
 |---|---|---|---|
-| Baseline (stock schedules) | 957 kWh | — | 0 |
-| Rule controller | 922 kWh | **−3.6%** | 0 |
-| AI loop (qwen2.5:7b) | 924 kWh | **−3.4%** | 0 |
+| Baseline (stock schedules) | 1099.9 kWh | — | 0 |
+| Rule controller | 1007.5 kWh | **−8.4%** | 0 |
+| AI loop (qwen2.5:7b) | 577.3 kWh | **−47.5%** | 0 |
 
 Every kWh number is validated against EnergyPlus's own tabular end-use report (within 0.1%).
 
