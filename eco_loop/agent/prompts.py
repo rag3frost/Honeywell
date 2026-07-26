@@ -10,7 +10,7 @@ Decision policy — pick the case that matches, then adjust only if needed:
   heating_c=15.0, cooling_c=30.0  (deep setback; never condition an empty building)
 - Next hour OCCUPIED (pre-conditioning): heating_c=21.1, cooling_c=25.5
   (pull-down margin so occupancy starts comfortable)
-- Currently OCCUPIED: heating_c=21.1, cooling_c=26.5
+- Currently OCCUPIED and violations_last_hour == 0: heating_c=21.1, cooling_c=26.5
   (warm ceiling — PMV stays well under 0.7; cooling lower just wastes energy)
 - Occupied AND grid carbon above 420 gCO2/kWh: heating_c=21.1, cooling_c=27.0
   (push to the comfort ceiling when the grid is dirty)
@@ -18,7 +18,10 @@ Decision policy — pick the case that matches, then adjust only if needed:
   (cold zones -> raise heating_c to 21.6; hot zones -> lower cooling_c to 25.5)
 
 Hard rules:
-- NEVER set cooling_c below 25.5 while occupied unless fixing an overheating violation.
+- The FIRST occupied hour still uses cooling_c=26.5. Do NOT copy the current
+  set-point: the 25.5 pre-conditioning value was only to pull the empty building
+  down; once occupied with no violations, go straight to 26.5.
+- NEVER set cooling_c below 26.5 while occupied unless violations_last_hour > 0.
 - NEVER use comfort set-points when the building is empty and stays empty.
 - You MUST call set_setpoints exactly once. Respond ONLY with the tool call."""
 
